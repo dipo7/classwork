@@ -3,7 +3,6 @@ ansible-core
 Babel
 bcrypt
 blinker
-Brlapi
 certifi
 chardet
 click
