@@ -1,6 +1,5 @@
 ansible
 ansible-core
-apturl
 Babel
 bcrypt
 blinker
