@@ -11,4 +11,5 @@ cryptography
 defer
 fasteners
 future
+pluggy
 pytest
