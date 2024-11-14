@@ -27,7 +27,7 @@ jobs:
 
       # - name: Run tests
       #   run: |
-      #     pytest
+      #     pytest -v --maxfail=1
 
       - name: Log in to Docker Hub
         env:
