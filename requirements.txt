@@ -11,3 +11,4 @@ cryptography
 defer
 fasteners
 future
+pytest
