@@ -22,7 +22,7 @@ pipeline {
                     sh """
                         minikube status
                         kubectl get node
-                        kubectl apply -f k8s/deployment.yaml
+                        kubectl apply -f k8s/deployment.yml
                     """
             }
         }
