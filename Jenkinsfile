@@ -6,13 +6,16 @@ pipeline {
         IMAGE_NAME = "dipoelegbede/greeter-app:${env.GIT_COMMIT}"
         KUBE_CONFIG = credentials('k8s-config')
         SLACK_WEBHOOK = credentials('slack-webhook')
+        DOCKER_TOKEN = credentials('jenkins-docker')
     }
 
     stages {
         stage('Pull Docker Image') {
             steps {
                 script {
-                    sh "docker pull ${IMAGE_NAME}"
+                    withEnv(["DOCKER_TOKEN=${DOCKER_TOKEN}"]) {
+                        sh "docker pull ${IMAGE_NAME}"
+                    }
                 }
             }
         }
