@@ -44,6 +44,8 @@ pipeline {
     }
 }
 
+import groovy.json.JsonOutput
+
 def sendSlackNotification(message) {
     def payload = JsonOutput.toJson([text: message])
     // withEnv(["SLACK_WEBHOOK=${SLACK_WEBHOOK}"]) {
