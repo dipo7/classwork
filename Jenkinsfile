@@ -5,9 +5,6 @@ pipeline {
         IMAGE_NAME = "dipoelegbede/greeter-app:${env.GIT_COMMIT}"
         KUBE_CONFIG = credentials('k8s-config')
         SLACK_WEBHOOK = credentials('slack-webhook')
-        // JIRA_URL = 'https://your-jira-instance.atlassian.net'
-        // JIRA_USER = credentials('jira-user')
-        // JIRA_API_TOKEN = credentials('jira-api-token')
     }
 
     stages {
@@ -48,10 +45,10 @@ pipeline {
 
 def sendSlackNotification(message) {
     withEnv(["SLACK_WEBHOOK=${SLACK_WEBHOOK}"]) {
-        sh """
-            curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"${message}"}' ${SLACK_WEBHOOK}
-        """
+        sh '''
+            curl -X POST -H "Content-type: application/json" \
+            --data "{\"text\": \"'${message}'\"}" "$SLACK_WEBHOOK"
+        '''
     }
 }
 
