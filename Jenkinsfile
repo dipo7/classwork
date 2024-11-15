@@ -28,30 +28,30 @@ pipeline {
         }
     }
 
-    // post {
-    //     success {
-    //         script {
-    //             sendSlackNotification("Deployment succeeded for ${env.BRANCH_NAME}")
-    //             // updateJiraTicket("Deployment succeeded")
-    //         }
-    //     }
-    //     failure {
-    //         script {
-    //             sendSlackNotification("Deployment failed for ${env.BRANCH_NAME}")
-    //             // updateJiraTicket("Deployment failed")
-    //         }
-    //     }
-    // }
+    post {
+        success {
+            script {
+                sendSlackNotification("Deployment succeeded for ${env.BRANCH_NAME}")
+                // updateJiraTicket("Deployment succeeded")
+            }
+        }
+        failure {
+            script {
+                sendSlackNotification("Deployment failed for ${env.BRANCH_NAME}")
+                // updateJiraTicket("Deployment failed")
+            }
+        }
+    }
 }
 
-// def sendSlackNotification(message) {
-//     withEnv(["SLACK_WEBHOOK=${SLACK_WEBHOOK}"]) {
-//         sh '''
-//             curl -X POST -H "Content-type: application/json" \
-//             --data "{\"text\": \"'${message}'\"}" "$SLACK_WEBHOOK"
-//         '''
-//     }
-// }
+def sendSlackNotification(message) {
+    withEnv(["SLACK_WEBHOOK=${SLACK_WEBHOOK}"]) {
+        sh '''
+            curl -X POST -H "Content-type: application/json" \
+            --data "{\"text\": \"'${message}'\"}" "$SLACK_WEBHOOK"
+        '''
+    }
+}
 
 // def updateJiraTicket(comment) {
 //     sh """
