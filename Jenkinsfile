@@ -14,8 +14,7 @@ pipeline {
             steps {
                 script {
                     // withEnv(["DOCKER_TOKEN=${DOCKER_TOKEN}"]) {
-                    sh "pwd"
-                        // sh "docker pull ${IMAGE_NAME}"
+                        sh "docker pull ${IMAGE_NAME}"
                     // }
                 }
             }
