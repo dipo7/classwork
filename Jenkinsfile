@@ -7,6 +7,7 @@ pipeline {
         MINIKUBE_HOME = "/var/lib/jenkins/.minikube"
         HOME = "/var/lib/jenkins"
         SLACK_WEBHOOK = credentials('slack-webhook')
+        BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
     }
 
     stages {
@@ -31,13 +32,13 @@ pipeline {
     post {
         success {
             script {
-                sendSlackNotification("Deployment succeeded for ${env.BRANCH_NAME}")
+                sendSlackNotification("Deployment succeeded for ${BRANCH_NAME}")
                 // updateJiraTicket("Deployment succeeded")
             }
         }
         failure {
             script {
-                sendSlackNotification("Deployment failed for ${env.BRANCH_NAME}")
+                sendSlackNotification("Deployment failed for ${BRANCH_NAME}")
                 // updateJiraTicket("Deployment failed")
             }
         }
