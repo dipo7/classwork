@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: greeting-app-container
-        image: dipoelegbede/greeter-app:latest
+        image:  dipoelegbede/greeter-app:2d22d3b47f625ad42e5a8d3538b60258b91be960
         ports:
         - containerPort: 80

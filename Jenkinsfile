@@ -8,14 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Pull Docker Image') {
-            steps {
-                script {
-                    sh "docker pull ${IMAGE_NAME}"
-                }
-            }
-        }
-
         stage('Deploy to Kubernetes') {
             steps {
                 script {
