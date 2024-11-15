@@ -45,12 +45,15 @@ pipeline {
 }
 
 def sendSlackNotification(message) {
-    withEnv(["SLACK_WEBHOOK=${SLACK_WEBHOOK}"]) {
-        sh '''
-            curl -X POST -H "Content-type: application/json" \
-            --data "{\"text\": \"'${message}'\"}" "$SLACK_WEBHOOK"
-        '''
-    }
+    def payload = JsonOutput.toJson([text: message])
+    // withEnv(["SLACK_WEBHOOK=${SLACK_WEBHOOK}"]) {
+        sh """
+            curl -X POST \
+            -H 'Content-type: application/json' \
+            --data '${payload}' \
+            ${SLACK_WEBHOOK}
+        """
+    // }
 }
 
 // def updateJiraTicket(comment) {
