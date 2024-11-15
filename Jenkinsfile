@@ -2,12 +2,19 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "dipoelegbede/greeter-app:${env.GIT_COMMIT}"
+        IMAGE_NAME = "dipoelegbede/greeter-app:latest"
         KUBE_CONFIG = credentials('k8s-config')
         SLACK_WEBHOOK = credentials('slack-webhook')
     }
 
     stages {
+
+        stage('Debug') {
+            steps {
+                echo "Starting Kubernetes deployment stage..."
+            }
+        }
+        
         stage('Deploy to Kubernetes') {
             steps {
                 script {

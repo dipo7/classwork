@@ -37,10 +37,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t greeter-app:${{ github.sha }} .
+          docker build -t greeter-app:latest .
 
       - name: Push Docker image to registry
         run: |
-          docker tag greeter-app:${{ github.sha }} dipoelegbede/greeter-app:${{ github.sha }}
-          docker push dipoelegbede/greeter-app:${{ github.sha }}
+          docker tag greeter-app:latest dipoelegbede/greeter-app:latest
+          docker push dipoelegbede/greeter-app:latest
  
