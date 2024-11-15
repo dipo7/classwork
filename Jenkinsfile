@@ -3,7 +3,9 @@ pipeline {
 
     environment {
         IMAGE_NAME = "dipoelegbede/greeter-app:latest"
-        KUBE_CONFIG = credentials('k8s-config')
+        KUBECONFIG = "/var/lib/jenkins/.kube/config"
+        MINIKUBE_HOME = "/var/lib/jenkins/.minikube"
+        HOME = "/var/lib/jenkins"
         SLACK_WEBHOOK = credentials('slack-webhook')
     }
 
@@ -14,14 +16,14 @@ pipeline {
                 echo "Starting Kubernetes deployment stage..."
             }
         }
-        
+
         stage('Deploy to Kubernetes') {
             steps {
-                script {
-                    withKubeConfig([credentialsId: 'k8s-config']) {
-                        sh "kubectl apply -f k8s/deployment.yaml"
-                    }
-                }
+                    sh """
+                        minikube status
+                        kubectl get node
+                        kubectl apply -f k8s/deployment.yaml
+                    """
             }
         }
     }
