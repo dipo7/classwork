@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+
     environment {
         IMAGE_NAME = "dipoelegbede/greeter-app:${env.GIT_COMMIT}"
         KUBE_CONFIG = credentials('k8s-config')
